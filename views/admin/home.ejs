@@ -47,7 +47,9 @@
         <td><%= admin.mobile %></td>
     </tr>
 </table>
-
-<a href="admin/logout">Logout</a>
+<form action="/admin/logout" method="post">
+    <button type="submit">Logout</button>
+</form>
+<!-- <a href="admin/logout">Logout</a> -->
 
 <% include('../layouts/header.ejs') %>

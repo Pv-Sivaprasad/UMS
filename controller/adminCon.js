@@ -1,9 +1,12 @@
 const User=require('../model/userModel')
 
 const bcrypt=require('bcrypt')
+
 const randomstring=require('randomstring')
+
 const config=require('../config/config')
 
+// for secure password
 const securePassword=async(password)=>{
     try {
 
@@ -14,7 +17,7 @@ const securePassword=async(password)=>{
         console.log(error.message);
     }
   }
-
+//admin login page
 const loadLogin=async(req,res)=>{
     try {
         res.render('login')
@@ -23,7 +26,7 @@ const loadLogin=async(req,res)=>{
         console.log(error.message);
     }
 }
-
+//admin data post
 const verifyLogin=async(req,res)=>{
     try {
        
@@ -57,7 +60,7 @@ const verifyLogin=async(req,res)=>{
         console.log(error.message);
     }
 }
-
+//load home
 const loadDashboard=async(req,res)=>{
     try {
             const userData=  await User.findById({_id:req.session.user_id});
@@ -67,7 +70,7 @@ const loadDashboard=async(req,res)=>{
         console.log(error.message);
     }
 }
-
+//logout
 const  logout=async(req,res)=>{
     try {
           req.session.destroy();
@@ -118,7 +121,6 @@ const addUser=async(req,res)=>{
         const email=req.body.email
         const mobile=req.body.mobile
         const image=req.file.filename
-        // const password=randomstring.generate(8)
         const password=req.body.password
 
         const spassword=await securePassword(password)

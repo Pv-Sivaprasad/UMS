@@ -12,6 +12,8 @@ user_route.use(session({
      saveUninitialized:true
 }))
 
+const auth=require('../middleware/auth')
+
 user_route.set('view engine','ejs')
 
 user_route.set('views','./views/users')
@@ -20,7 +22,7 @@ user_route.set('views','./views/users')
  
  user_route.use(express.urlencoded({extended:true}))
 
- const auth=require('../middleware/auth')
+ 
 
  const multer=require("multer")
  const path=require("path")
@@ -39,6 +41,8 @@ user_route.set('views','./views/users')
  })
    
       const upload=multer({storage:storage })
+
+      
     
 const userController=require('../controller/userCon')
 

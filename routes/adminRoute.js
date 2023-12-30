@@ -2,13 +2,10 @@ const express=require('express');
 
 const admin_route=express();
 
-
-
 const session= require('express-session');
 
-
-
 const config=require('../config/config');
+
 admin_route.use(session({
     secret:config.sessionSecret,
     resave:false,
@@ -24,6 +21,7 @@ admin_route.set('view engine','ejs');
 admin_route.set('views','./views/admin');
 
 const multer=require("multer")
+
 const path=require("path")
 
 
@@ -52,7 +50,8 @@ admin_route.post('/',adminController.verifyLogin)
 
 admin_route.get('/home',auth.isLogin,adminController.loadDashboard)
 
-admin_route.get('/logout',auth.isLogin,adminController.logout)
+// admin_route.get('/logout',auth.isLogin,adminController.logout)
+admin_route.post('/logout',auth.isLogin,adminController.logout)
 
 admin_route.get('/dashboard',adminController.adminDasboard)
 
