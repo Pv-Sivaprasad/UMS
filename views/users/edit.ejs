@@ -36,7 +36,7 @@
         <input type="hidden" name="user_id" value="<%= user._id %>">
         <br><br>
         <label>name</label><br>
-        <input type="text" class="form-control" name="name" value="<%= user.name %>" placeholder="Enter Name" required>
+        <input type="text" class="form-control"  pattern="^[A-Za-z][A-Za-z\s]*[A-Za-z]$" name="name" value="<%= user.name %>" placeholder="Enter Name" required>
         <br><br>
         <label>email</label><br>
         <input type="email" class="form-control" name="email" value="<%= user.email %>" placeholder="Enter email" required>

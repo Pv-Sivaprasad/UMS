@@ -43,7 +43,7 @@ const verifyLogin=async(req,res)=>{
                 if (userData.is_admin===0) {
                     res.render('login',{message:"email and password incorrect"})
                 } else {
-                   req.session.user_id=userData._id 
+                   req.session.admin_id=userData._id 
                    res.redirect('/admin/home')
                 }
 
@@ -63,7 +63,7 @@ const verifyLogin=async(req,res)=>{
 //load home
 const loadDashboard=async(req,res)=>{
     try {
-            const userData=  await User.findById({_id:req.session.user_id});
+            const userData=  await User.findById({_id:req.session.admin_id});
         res.render('home',{admin:userData})
 
     } catch (error) {
@@ -73,7 +73,8 @@ const loadDashboard=async(req,res)=>{
 //logout
 const  logout=async(req,res)=>{
     try {
-          req.session.destroy();
+        req.session.admin_id=null;
+        //   req.session.destroy();
           res.redirect('/admin/home')        
     } catch (error) {
         console.log(error.message);

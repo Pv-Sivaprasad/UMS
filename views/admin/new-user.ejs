@@ -6,7 +6,7 @@
         <h1>Add New User</h1>
 
         <form action="" method="post" enctype="multipart/form-data">
-            <input type="text" name="name" placeholder="Name" class="form-control mb-2" required>
+            <input type="text" name="name" placeholder="Name"pattern="^[A-Za-z][A-Za-z\s]*[A-Za-z]$" class="form-control mb-2" required>
             <br><br>
             <input type="email" name="email" placeholder="Email" class="form-control mb-2" required>
             <br><br>

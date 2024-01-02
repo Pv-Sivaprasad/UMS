@@ -29,7 +29,7 @@
    
 
       <form action="" method="POST">
-        <input type="name" class="form-control mb-3" name="name" placeholder="Enter Name" value="<%= user.name %>" required>
+        <input type="name" class="form-control mb-3" name="name"  pattern="^[A-Za-z][A-Za-z\s]*[A-Za-z]$" placeholder="Enter Name" value="<%= user.name %>" required>
         <br><br>
         <input type="email" class="form-control mb-3" name="email" placeholder="Enter Email" value="<%= user.email %>" required>
         <input type="Number" class="form-control mb-3" name="mobile" placeholder="Enter Mobile Number" value="<%= user.mobile %>" required>

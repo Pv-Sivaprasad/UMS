@@ -1,6 +1,6 @@
 const isLogin = async (req, res, next) => {
     try {
-        if (req.session.user_id) {
+        if (req.session.admin_id) {
             next();
            
         } else {
@@ -15,7 +15,7 @@ const isLogin = async (req, res, next) => {
 
 const isLogout = async (req, res, next) => {
     try {
-        if(req.session.user_id){
+        if(req.session.admin_id){
             res.redirect('/admin/home')
         }else{
             next();
@@ -30,17 +30,3 @@ module.exports = {
     isLogin,
     isLogout
 };
-// if (req.session.user_id) {
-           
-    //     req.session.destroy((err) => {
-    //         if (err) {
-    //             console.log(err.message);
-    //             res.status(500).send('Internal Server Error');
-    //         } else {
-    //             res.redirect('/admin/login');
-    //         }
-    //     });
-    // } else {
-   
-    //     next();
-    // }
