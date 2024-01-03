@@ -17,10 +17,12 @@
         res.render('registration')
 
     } catch (error) {
-        console.log(error.message);
+     console.log(error.message);
+       
     }
  }
 
+  
  const insertUser=async(req,res)=>{
     try {
         const spassword= await securePassword(req.body.password)

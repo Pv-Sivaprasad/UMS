@@ -13,12 +13,17 @@ app.use(noCache())
 //for user Routes
 const userRoute=require('./routes/userRoute')
 
+
+
 app.use('/',userRoute);
+
 
 //for admin Routes
 const adminRoute=require('./routes/adminRoute')
 
 app.use('/admin',adminRoute);
+
+
 
 const port=5000
 app.listen(port,()=>console.log(`server is running on port:${port}`))
