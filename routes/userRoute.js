@@ -47,15 +47,11 @@ user_route.set('views','./views/users')
 const userController=require('../controller/userCon')
 
 user_route.get('/register',auth.isLogout,userController.loadRegister)
-
-
-
 user_route.post('/register',upload.single('image'),userController.insertUser);
 
+
 user_route.get('/',auth.isLogout,userController.loginLoad)
-
 user_route.get('/login',auth.isLogout,userController.loginLoad)
-
 user_route.post('/login',userController.verifyLogin)
 
 user_route.get('/home',auth.isLogin,userController.loadHome);

@@ -61,7 +61,7 @@ admin_route.post('/new-user',upload.single('image'),adminController.addUser)
 
 admin_route.get('/edit-user',auth.isLogin,adminController.editUserLoad)
 
-admin_route.post('/edit-user',adminController.updateUsers)
+admin_route.post('/edit-user',adminController.updateUser)
 
 admin_route.get('/delete-user',adminController.deleteUser)
 

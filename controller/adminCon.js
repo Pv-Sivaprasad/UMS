@@ -64,7 +64,7 @@ const verifyLogin=async(req,res)=>{
 const loadDashboard=async(req,res)=>{
     try {
             const userData=  await User.findById({_id:req.session.admin_id});
-        res.render('home',{admin:userData})
+            res.render('home',{admin:userData})
 
     } catch (error) {
         console.log(error.message);
@@ -97,8 +97,13 @@ const adminDasboard=async(req,res)=>{
                     { mobile: {$regex:'.*'+search+'.*',$options:'i'} }
                 ]
         })
-      
-      res.render('dashboard',{users:usersData})
+        if(req.session.updateError)
+ {
+            var msg="the email id is exsisting please provide another mail"
+            req.session.updateError=false
+        }
+         
+      res.render('dashboard',{users:usersData,msg})
 
     } catch (error) {
         console.log(error.message);
@@ -152,6 +157,8 @@ const addUser=async(req,res)=>{
         console.log(error.message)
     }
 }
+
+  
 //edit user 
 const editUserLoad=async(req,res)=>{
     try {
@@ -169,17 +176,33 @@ const editUserLoad=async(req,res)=>{
 }
 //update user 
 
-const updateUsers=async(req,res)=>{
+const updateUser=async(req,res)=>{
     try {
-       
-         const userData=  await User.findByIdAndUpdate({_id:req.body.id},{$set:{ name:req.body.name,email:req.body.email,mobile:req.body.mobile,is_varified:req.body.verify} })
+        const email=req.body.email
+        const exsistingUser=await User.findOne({email:email})
+
+        if(exsistingUser){
+          // res.render("edit-user",{message:"User Already exsist"})
+          req.session.updateError=true
+           res.redirect('/admin/dashboard')
+        }
+       else{
+        const userData=  await User.findByIdAndUpdate({_id:req.body.id},{$set:{ name:req.body.name,email:req.body.email,mobile:req.body.mobile,is_varified:req.body.verify} })
       
-         res.redirect('/admin/dashboard') 
+        res.redirect('/admin/dashboard')
+       }
+          
          
         } catch (error) {
         console.log(error.message);
     }
 }
+
+
+  
+
+
+
 //delete user
 
 const deleteUser=async(req,res)=>{
@@ -192,6 +215,7 @@ const deleteUser=async(req,res)=>{
     }
 }
 
+  
 module.exports={
     loadLogin,
     verifyLogin,
@@ -201,7 +225,7 @@ module.exports={
     newUserLoad,
     addUser,
     editUserLoad,
-    updateUsers,
+    updateUser,
     deleteUser
    
 }
