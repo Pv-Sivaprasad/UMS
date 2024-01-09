@@ -182,15 +182,25 @@ const updateUser=async(req,res)=>{
         const exsistingUser=await User.findOne({email:email})
 
         if(exsistingUser){
-          // res.render("edit-user",{message:"User Already exsist"})
+          console.log('enterd here');
           req.session.updateError=true
            res.redirect('/admin/dashboard')
         }
-       else{
-        const userData=  await User.findByIdAndUpdate({_id:req.body.id},{$set:{ name:req.body.name,email:req.body.email,mobile:req.body.mobile,is_varified:req.body.verify} })
+     //  else{
+        const userData=  await User.findByIdAndUpdate({_id:req.body.id},
+            {$set:
+            
+                { name:req.body.name,
+                    email:req.body.email,
+                    mobile:req.body.mobile,
+                    is_varified:req.body.verify
+                } 
+            })
+            console.log('enterd here too');
+
       
         res.redirect('/admin/dashboard')
-       }
+       //}
           
          
         } catch (error) {
